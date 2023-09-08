@@ -1,0 +1,9 @@
+{"apiCallParams":{"endpoint":"/api/some-endpoint","method":"GET","status":200},"level":"info","message":"User login event","timestamp":"2023-09-08T10:24:23.751Z","user":{"id":1,"username":"exampleUser"}}
+{"ip":"::1","level":"info","message":"API Call","method":"GET","originalUrl":"/","protocol":"http","timestamp":"2023-09-08T10:30:01.932Z"}
+{"ip":"::1","level":"info","message":"API Call","method":"GET","originalUrl":"/","protocol":"http","timestamp":"2023-09-08T10:32:47.632Z"}
+{"ip":"127.0.0.1","level":"info","message":"API Call","method":"GET","originalUrl":"/","protocol":"http","timestamp":"2023-09-08T10:41:30.814Z"}
+{"ip":"127.0.0.1","level":"info","message":"API Call","method":"GET","originalUrl":"/favicon.ico","protocol":"http","timestamp":"2023-09-08T10:41:30.888Z"}
+{"ip":"::1","level":"info","message":"API Call","method":"GET","originalUrl":"/","protocol":"http","timestamp":"2023-09-08T10:43:07.727Z"}
+{"ip":"::1","level":"info","message":"API Call","method":"GET","originalUrl":"/","protocol":"http","timestamp":"2023-09-08T10:46:52.352Z"}
+{"ip":"::1","level":"info","message":"API Call","method":"GET","originalUrl":"/api/signup","protocol":"http","timestamp":"2023-09-08T10:49:30.935Z"}
+{"ip":"::1","level":"info","message":"API Call","method":"PUT","originalUrl":"/api/signup","protocol":"http","timestamp":"2023-09-08T10:49:45.143Z"}
