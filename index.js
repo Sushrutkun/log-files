@@ -41,22 +41,22 @@ app.use(async(req, res) => {
   try {
     const response = await axios.get('https://httpbin.org/ip');
     const publicIpAddress = response.data.origin;
-    // res.send(`Public IP Address: ${publicIpAddress}`);
+    const data = {
+      publicIpAddress,
+      method:req.method,
+      originalUrl:req.originalUrl,
+      protocol:req.protocol,
+    };
+    
+    // Log the data using the Winston logger
+    logger.info('API Call', data);
+    console.log(data);
+    res.json(data);
   } catch (error) {
     logger.error('Error fetching public IP address:', error);
     res.status(500).send('Error fetching public IP address');
   }
-  const data = {
-    publicIpAddress,
-    method:req.method,
-    originalUrl:req.originalUrl,
-    protocol:req.protocol,
-  };
   
-  // Log the data using the Winston logger
-  logger.info('API Call', data);
-  console.log(data);
-  res.json(data);
   
 });
 
@@ -66,16 +66,16 @@ app.get('/', (req, res) => {
 });
 
 // Fetch the public IP address using Axios
-// app.get('/public-ip', async (req, res) => {
-//   try {
-//     const response = await axios.get('https://httpbin.org/ip');
-//     const publicIpAddress = response.data.origin;
-//     res.send(`Public IP Address: ${publicIpAddress}`);
-//   } catch (error) {
-//     logger.error('Error fetching public IP address:', error);
-//     res.status(500).send('Error fetching public IP address');
-//   }
-// });
+app.get('/public-ip', async (req, res) => {
+  try {
+    const response = await axios.get('https://httpbin.org/ip');
+    const publicIpAddress = response.data.origin;
+    res.send(`Public IP Address: ${publicIpAddress}`);
+  } catch (error) {
+    logger.error('Error fetching public IP address:', error);
+    res.status(500).send('Error fetching public IP address');
+  }
+});
 
 // Start the server
 const port = process.env.PORT || 3000;
