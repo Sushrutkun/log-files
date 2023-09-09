@@ -4,7 +4,7 @@ const winston = require('winston');
 const axios = require('axios');
 
 const app = express();
-
+// app.use(express.json());
 // Configure Winston logger
 const logFormat = winston.format.combine(
   winston.format.timestamp(),
@@ -34,6 +34,22 @@ app.use((req, res, next) => {
   });
 
   next();
+});
+
+// console.log(logger.transports[1]);
+app.use((req, res) => {
+  const data = {
+    ip:req.ip,
+    method:req.method,
+    originalUrl:req.originalUrl,
+    protocol:req.protocol,
+  };
+  
+  // Log the data using the Winston logger
+  logger.info('API Call', data);
+  console.log(data);
+  res.json(data);
+  
 });
 
 // Define a simple API endpoint
