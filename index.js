@@ -37,9 +37,17 @@ app.use((req, res, next) => {
 });
 
 // console.log(logger.transports[1]);
-app.use((req, res) => {
+app.use(async(req, res) => {
+  try {
+    const response = await axios.get('https://httpbin.org/ip');
+    const publicIpAddress = response.data.origin;
+    // res.send(`Public IP Address: ${publicIpAddress}`);
+  } catch (error) {
+    logger.error('Error fetching public IP address:', error);
+    res.status(500).send('Error fetching public IP address');
+  }
   const data = {
-    ip:req.ip,
+    publicIpAddress,
     method:req.method,
     originalUrl:req.originalUrl,
     protocol:req.protocol,
@@ -58,16 +66,16 @@ app.get('/', (req, res) => {
 });
 
 // Fetch the public IP address using Axios
-app.get('/public-ip', async (req, res) => {
-  try {
-    const response = await axios.get('https://httpbin.org/ip');
-    const publicIpAddress = response.data.origin;
-    res.send(`Public IP Address: ${publicIpAddress}`);
-  } catch (error) {
-    logger.error('Error fetching public IP address:', error);
-    res.status(500).send('Error fetching public IP address');
-  }
-});
+// app.get('/public-ip', async (req, res) => {
+//   try {
+//     const response = await axios.get('https://httpbin.org/ip');
+//     const publicIpAddress = response.data.origin;
+//     res.send(`Public IP Address: ${publicIpAddress}`);
+//   } catch (error) {
+//     logger.error('Error fetching public IP address:', error);
+//     res.status(500).send('Error fetching public IP address');
+//   }
+// });
 
 // Start the server
 const port = process.env.PORT || 3000;
